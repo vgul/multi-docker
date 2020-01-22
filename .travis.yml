@@ -6,21 +6,21 @@ services:
   - docker
 
 before_install:
-  - docker build -t vlad/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t banderlogic/react-test -f ./client/Dockerfile.dev ./client
   
 
 script:
-  - docker run -e CI=true vlad/react-test npm test -- --coverage
+  - docker run -e CI=true banderlogic/react-test npm test -- --coverage
 
 
 after_success:
-  - docker build -t vlad/multi-client ./client
-  - docker build -t vlad/multi-nginx  ./nginx
-  - docker build -t vlad/multi-server ./server
-  - docker build -t vlad/multi-worker ./worker
+  - docker build -t banderlogic/multi-client ./client
+  - docker build -t banderlogic/multi-nginx  ./nginx
+  - docker build -t banderlogic/multi-server ./server
+  - docker build -t banderlogic/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push vlad/multi-client
-  - docker push vlad/multi-nginx
-  - docker push vlad/multi-server
-  - docker push vlad/multi-worker
+  - docker push banderlogic/multi-client
+  - docker push banderlogic/multi-nginx
+  - docker push banderlogic/multi-server
+  - docker push banderlogic/multi-worker
 
