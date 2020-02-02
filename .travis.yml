@@ -24,3 +24,18 @@ after_success:
   - docker push banderlogic/multi-server
   - docker push banderlogic/multi-worker
 
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  regsion: us-east-1
+  app: multi-docker3
+  env: MultiDocker3-env
+  bucket_name: elasticbeanstalk-us-east-1-620873109467
+  bucket_path: multi-docker3
+  on:
+    branch: master
+
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key:
+  secure: $AWS_SECRET_KEY
+
